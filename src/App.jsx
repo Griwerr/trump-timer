@@ -1,4 +1,3 @@
-// src/App.jsx
 import { useEffect, useState } from "react"
 import "./App.css"
 import putin from "./assets/putin.png"
@@ -14,13 +13,16 @@ function App() {
 		if (difference <= 0) return null
 
 		const totalSeconds = Math.floor(difference / 1000)
+		const rawProgress =
+			((now - trumpStartDate) / (trumpEndDate - trumpStartDate)) * 100
+		const progress = Math.min(100, Math.max(0, rawProgress))
+
 		return {
 			days: Math.floor(totalSeconds / (3600 * 24)),
 			hours: Math.floor((totalSeconds % (3600 * 24)) / 3600),
 			minutes: Math.floor((totalSeconds % 3600) / 60),
 			seconds: totalSeconds % 60,
-			progress:
-				((now - trumpStartDate) / (trumpEndDate - trumpStartDate)) * 100,
+			progress,
 		}
 	}
 
@@ -122,11 +124,15 @@ function App() {
 					</div>
 				</div>
 
-				<div className="w-full h-2 bg-neutral-300 rounded-full mt-4">
+				<div className="w-full bg-neutral-300 rounded-full mt-4 relative h-6 cursor-pointer group">
 					<div
 						className="h-full bg-amber-400 rounded-full transition-all duration-500"
 						style={{ width: `${timeLeft.progress}%` }}
 					></div>
+
+					<div className="absolute inset-0 flex items-center justify-center text-dark font-semibold select-none text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+						{timeLeft.progress.toFixed(4)}%
+					</div>
 				</div>
 
 				<p className="mt-2 text-sm text-gray-700">
