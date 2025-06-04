@@ -1,0 +1,46 @@
+html,
+body,
+#root {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+body {
+	margin: 0;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	background: linear-gradient(to right, #ff6b6b, #f7d794);
+	color: #fff;
+	text-align: center;
+}
+
+.container {
+	padding: 50px 20px;
+}
+
+.timer {
+	font-size: 2rem;
+	margin: 20px 0;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	background: rgba(0, 0, 0, 0.2);
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.trump-img {
+	margin-top: 30px;
+	width: 200px;
+	border-radius: 50%;
+	border: 5px solid #fff;
+}
+
+.note {
+	margin-top: 20px;
+	font-size: 0.9rem;
+	color: #222;
+	background: #fff;
+	display: inline-block;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
