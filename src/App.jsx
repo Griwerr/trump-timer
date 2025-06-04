@@ -39,7 +39,7 @@ function App() {
 	}, [])
 
 	const shareCountdown = () => {
-		const text = `🕒 Трампу ще сидіти ${timeLeft.days} днів, ${timeLeft.hours} год, ${timeLeft.minutes} хв і ${timeLeft.seconds} сек!`
+		const text = `🕒 Трампу ще сидіти у Білому домі ${timeLeft.days} днів, ${timeLeft.hours} год, ${timeLeft.minutes} хв і ${timeLeft.seconds} сек!`
 		if (navigator.share) {
 			navigator.share({ title: "Trump Timer", text, url: window.location.href })
 		} else {
