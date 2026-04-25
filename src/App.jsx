@@ -56,7 +56,6 @@ function App() {
 		return (
 			<main className={`meme-page ${isDark ? "night" : "day"}`}>
 				<section className="meme-board done-board">
-					<div className="meme-badge">FAKE NEWS</div>
 					<h1>GAME OVER: каденцію завершено</h1>
 					<p className="sub">Mission complete. Мем-табло офіційно зупинено.</p>
 					<div
@@ -81,8 +80,6 @@ function App() {
 	return (
 		<main className={`meme-page ${isDark ? "night" : "day"}`}>
 			<section className="meme-board" role="timer" aria-live="polite">
-				<div className="meme-badge">FAKE NEWS</div>
-
 				<header className="hero">
 					<h1>Скільки Трампу ще сидіти у Білому домі? 🦧</h1>
 				</header>
