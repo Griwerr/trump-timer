@@ -41,6 +41,8 @@ function App() {
 	}, [])
 
 	const shareCountdown = () => {
+		if (!timeLeft) return
+
 		const text = `🕒 Трампу ще сидіти у Білому домі ${timeLeft.days} днів, ${timeLeft.hours} год, ${timeLeft.minutes} хв і ${timeLeft.seconds} сек!`
 		if (navigator.share) {
 			navigator.share({ title: "Trump Timer", text, url: window.location.href })
@@ -52,101 +54,100 @@ function App() {
 
 	if (!timeLeft) {
 		return (
-			<div
-				className={`min-h-screen flex flex-col items-center justify-center ${
-					isDark ? "bg-gray-300 text-gray-800" : "bg-gray-100 text-gray-700"
-				} text-center p-4`}
-			>
-				<h1 className="text-3xl md:text-5xl font-bold mb-4">
-					🎉 Трамп більше не президент! 🎉
-				</h1>
-				<div className="w-52 md:w-72 h-52 md:h-72 overflow-hidden rounded-full">
-					<div className="w-full h-full overflow-hidden rounded-full">
-						<img
-							src={showPutin ? putin : trump}
-							alt="Trump or Putin"
-							className="object-cover w-full h-full"
-							onMouseEnter={() => setShowPutin(true)}
-							onMouseLeave={() => setShowPutin(false)}
-						/>
+			<main className={`meme-page ${isDark ? "night" : "day"}`}>
+				<section className="meme-board done-board">
+					<div className="meme-badge">FAKE NEWS</div>
+					<h1>GAME OVER: каденцію завершено</h1>
+					<p className="sub">Mission complete. Мем-табло офіційно зупинено.</p>
+					<div
+						className={`avatar-frame ${showPutin ? "is-hovered" : ""}`}
+						onMouseEnter={() => setShowPutin(true)}
+						onMouseLeave={() => setShowPutin(false)}
+					>
+						<img src={trump} alt="Trump" className="avatar base" />
+						<img src={putin} alt="Putin" className="avatar alt" />
 					</div>
-				</div>
-				<audio autoPlay>
-					<source
-						src="https://www.fesliyanstudios.com/play-mp3/387"
-						type="audio/mp3"
-					/>
-				</audio>
-			</div>
+					<audio autoPlay>
+						<source
+							src="https://www.fesliyanstudios.com/play-mp3/387"
+							type="audio/mp3"
+						/>
+					</audio>
+				</section>
+			</main>
 		)
 	}
 
 	return (
-		<div
-			className={`min-h-screen flex flex-col items-center justify-center px-4 py-8 text-center ${
-				isDark
-					? "bg-gray-300 text-gray-800"
-					: "bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 text-gray-800"
-			}`}
-		>
-			<div className="w-52 md:w-72 h-52 md:h-72 overflow-hidden rounded-full mt-6 mb-5">
-				<div className="w-full h-full overflow-hidden rounded-full">
-					<img
-						src={showPutin ? putin : trump}
-						alt="Trump or Putin"
-						className="object-cover w-full h-full"
+		<main className={`meme-page ${isDark ? "night" : "day"}`}>
+			<section className="meme-board" role="timer" aria-live="polite">
+				<div className="meme-badge">FAKE NEWS</div>
+
+				<header className="hero">
+					<h1>Скільки Трампу ще сидіти у Білому домі? 🦧</h1>
+				</header>
+
+				<div className="main-grid">
+					<div
+						className={`avatar-frame ${showPutin ? "is-hovered" : ""}`}
 						onMouseEnter={() => setShowPutin(true)}
 						onMouseLeave={() => setShowPutin(false)}
-					/>
-				</div>
-			</div>
-			<div className="bg-gray-100/80 backdrop-blur rounded-md shadow-sm p-6 max-w-xl w-full">
-				<h1 className="text-xl md:text-3xl font-extrabold mb-4 text-gray-800">
-					🕒 Скільки Трампу ще сидіти у Білому домі?
-				</h1>
+					>
+						<img src={trump} alt="Trump" className="avatar base" />
+						<img src={putin} alt="Putin" className="avatar alt" />
+						<p className="hover-tip">Hover = мой хороший друг</p>
+					</div>
 
-				<div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-lg md:text-2xl font-bold">
-					<div className="bg-amber-300  text-amber-900 rounded-md py-3 transition-colors duration-300">
-						{timeLeft.days}
-						<div className="text-sm">днів</div>
-					</div>
-					<div className="bg-gray-300  text-gray-900 rounded-md py-3 transition-colors duration-300">
-						{timeLeft.hours}
-						<div className="text-sm">год</div>
-					</div>
-					<div className="bg-gray-200  text-gray-800 rounded-md py-3 transition-colors duration-300">
-						{timeLeft.minutes}
-						<div className="text-sm">хв</div>
-					</div>
-					<div className="bg-gray-100  text-gray-700 rounded-md py-3 transition-colors duration-300">
-						{timeLeft.seconds}
-						<div className="text-sm">сек</div>
-					</div>
-				</div>
-
-				<div className="w-full bg-neutral-300 rounded-full mt-4 relative h-6 cursor-pointer group">
-					<div
-						className="h-full bg-amber-400 rounded-full transition-all duration-500"
-						style={{ width: `${timeLeft.progress}%` }}
-					></div>
-
-					<div className="absolute inset-0 flex items-center justify-center text-dark font-semibold select-none text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-						{timeLeft.progress.toFixed(4)}%
+					<div className="timer-grid">
+						<article className="tile yellow">
+							<strong>{timeLeft.days}</strong>
+							<span>днів</span>
+						</article>
+						<article className="tile blue">
+							<strong>{timeLeft.hours.toString().padStart(2, "0")}</strong>
+							<span>годин</span>
+						</article>
+						<article className="tile green">
+							<strong>{timeLeft.minutes.toString().padStart(2, "0")}</strong>
+							<span>хвилин</span>
+						</article>
+						<article className="tile red pulse">
+							<strong
+								key={timeLeft.seconds}
+								className="second-value"
+							>
+								{timeLeft.seconds.toString().padStart(2, "0")}
+							</strong>
+							<span>секунд</span>
+						</article>
 					</div>
 				</div>
 
-				<p className="mt-2 text-sm text-gray-700">
-					🏛 До 20 січня 2029 року, 12:00 EST
-				</p>
-			</div>
+				<div className="progress-wrap" title={`${timeLeft.progress.toFixed(2)}%`}>
+					<div className="progress-fill" style={{ width: `${timeLeft.progress}%` }} />
+					<span>{timeLeft.progress.toFixed(2)}%</span>
+				</div>
 
-			<button
-				onClick={shareCountdown}
-				className="mt-6 px-6 py-3 bg-gray-300 text-gray-800 font-bold rounded-full shadow-sm hover:scale-105 transition-transform cursor-pointer"
-			>
-				🔗 Поділитися
-			</button>
-		</div>
+				<div className="ticker" aria-hidden="true">
+					<div>
+						BREAKING NEWS: Колись путін назвав мене генієм, і що, я маю від
+						цього відхрещуватися? Ви з’їхали з глузду?
+					</div>
+				</div>
+
+				<footer className="footer-row">
+					<p>До 20 січня 2029 року, 12:00 EST</p>
+					<a
+						className="cta-link"
+						href="https://t.me/hlib_chahan"
+						target="_blank"
+						rel="noreferrer"
+					>
+						Обʼявити імпічмент
+					</a>
+				</footer>
+			</section>
+		</main>
 	)
 }
 
