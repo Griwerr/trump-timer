@@ -28,6 +28,7 @@ body {
 	padding: 14px;
 	display: grid;
 	place-items: center;
+	overflow-x: hidden;
 }
 
 .meme-page.day {
@@ -54,6 +55,7 @@ body {
 	border: 3px solid var(--line);
 	background: rgba(255, 248, 220, 0.9);
 	box-shadow: 14px 14px 0 rgba(17, 24, 39, 0.35);
+	overflow-x: hidden;
 }
 
 .night .meme-board {
@@ -322,7 +324,7 @@ h1 {
 }
 
 .progress-wrap {
-	margin-top: 24px;
+	margin-top: 34px;
 	height: 24px;
 	border: 2px solid var(--line);
 	border-radius: 999px;
@@ -415,6 +417,125 @@ h1 {
 	border-color: #e2e8f0;
 }
 
+@media (max-width: 600px) {
+	.meme-badge {
+		display: none;
+	}
+
+	.meme-page {
+		padding: 8px;
+	}
+
+	.meme-board {
+		padding: 24px 10px 12px;
+		border-radius: 18px;
+		border-width: 2px;
+		box-shadow: 8px 8px 0 rgba(17, 24, 39, 0.28);
+	}
+
+	.night .meme-board {
+		box-shadow: 8px 8px 0 rgba(2, 6, 23, 0.5);
+	}
+
+	.meme-badge {
+		left: 10px;
+		top: -11px;
+		padding: 4px 9px;
+		font-size: 0.64rem;
+		letter-spacing: 0.08em;
+		border-width: 1px;
+	}
+
+	h1 {
+		font-size: clamp(1.55rem, 8vw, 2.2rem);
+		line-height: 0.98;
+		letter-spacing: 0.01em;
+		max-width: 100%;
+		overflow-wrap: anywhere;
+		word-break: break-word;
+		text-wrap: pretty;
+	}
+
+	.hero {
+		gap: 6px;
+		overflow: hidden;
+	}
+
+	.main-grid {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+
+	.avatar-frame {
+		width: min(100%, 210px);
+		padding: 6px;
+	}
+
+	.avatar {
+		inset: 6px;
+		width: calc(100% - 12px);
+		height: calc(100% - 12px);
+	}
+
+	.timer-grid {
+		gap: 7px;
+	}
+
+	.tile {
+		min-height: 78px;
+		padding: 8px 6px;
+		border-radius: 12px;
+	}
+
+	.tile strong {
+		font-size: clamp(1.55rem, 7vw, 2.1rem);
+	}
+
+	.tile span {
+		font-size: 0.69rem;
+		letter-spacing: 0.06em;
+	}
+
+	.progress-wrap {
+		margin-top: 28px;
+		height: 20px;
+	}
+
+	.progress-wrap span {
+		font-size: 0.68rem;
+	}
+
+	.ticker {
+		margin-top: 8px;
+		border-width: 1px;
+	}
+
+	.ticker > div {
+		padding: 6px 0;
+		font-size: 0.66rem;
+	}
+
+	.footer-row {
+		margin-top: 14px;
+		gap: 8px;
+	}
+
+	.footer-row p {
+		font-size: 0.8rem;
+	}
+
+	.footer-row .cta-link {
+		width: 100%;
+		justify-self: stretch;
+		padding: 10px 12px;
+		font-size: 0.74rem;
+		letter-spacing: 0.02em;
+		line-height: 1.15;
+		text-align: center;
+		white-space: normal;
+	}
+}
+
 @media (min-width: 760px) {
 	.meme-board {
 		padding: 30px 18px 18px;
@@ -431,6 +552,12 @@ h1 {
 
 	.footer-row .cta-link {
 		justify-self: end;
+	}
+}
+
+@media (hover: none) and (pointer: coarse) {
+	.hover-tip {
+		display: none;
 	}
 }
 
